@@ -2,6 +2,9 @@
 
 require __DIR__ . '/vendor/autoload.php';
 require_once 'DummyResponse.php';
+require_once 'OcrSpaceFormatter.php';
+require_once 'OcrSpaceReceiptDecoder.php';
+require_once 'CorrectionController.php';
 
 class Engine
 {
@@ -17,7 +20,13 @@ class Engine
     {
         $dummyData = DummyResponse::getDummyResponse3();
         $response =  json_decode($dummyData,true);
-        return self::formatResultTable($response['ParsedResults']);
+        if ($lines = $response['ParsedResults'][0]['Overlay']['Lines'] ?? null)
+        {
+            $result = self::formatToHtml($lines);
+        } else {
+            $result = 'Invalid Response';
+        }
+        return $result;
     }
 
     private static function parseWithOCRSpace($target_file)
@@ -71,7 +80,12 @@ class Engine
             );
             $response =  json_decode($r->getBody(),true);            
             if (!isset($response['ErrorMessage']) || empty($response['ErrorMessage'])) {
-                $result = self::formatResultTable($response['ParsedResults']);
+                if ($lines = $response['ParsedResults'][0]['Overlay']['Lines'] ?? null)
+                {
+                    $result = self::formatToHtml($lines);
+                } else {
+                    $result = 'Invalid Response';
+                }
             } else {
                 $result = $response['ErrorMessage'];
             }
@@ -82,34 +96,14 @@ class Engine
         return $result;
     }
 
-    private static function formatResultTable($resultArray)
+    private static function formatToHtml($decodedLines)
     {
-        if (!isset($resultArray[0]['Overlay']['Lines']))
-        {
-            return 'Invalid Response';
-        }
-
-        $lines = $resultArray[0]['Overlay']['Lines'];
-    
-        $tableResponse = '<form action="index.php" method="POST">';  
-        $tableResponse .= '<input type="hidden" name="action" value="confirmConversion" /> ';
-        $tableResponse .= '<table>';
+        $decoder = new OcrSpaceReceiptDecoder();
+        $storeName = '';
+        $articles = $decoder->getArticles($decodedLines);
+        $totalSum = 0;
         
-        $i = 0;
-        foreach($lines as $line) {
-            $tableResponse .= '<tr><td>';
-            $tableResponse .= '<input type="text" name="value" value="'. $line['LineText'] .'" />'; 
-            $tableResponse .= '</td></tr>';
-            if ($i++ > 10000) {
-                break;
-            }            
-        }
-
-        $tableResponse .= '</table>';
-        $tableResponse .= '<button type="submit">Confirma</button>';        
-        $tableResponse .= '</form>';
-
-        return $tableResponse;
+        $formatter = new OcrSpaceFormatter();
+        return $formatter->formatResultTable($storeName, $articles, $totalSum);
     }
-
 }
