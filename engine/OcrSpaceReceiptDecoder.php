@@ -20,9 +20,9 @@ class OcrSpaceReceiptDecoder
                 $secondLastWord = $words[$wordCount-2]['WordText'] ?? '';
                 if (strlen($lastWord) == 1 && is_numeric($secondLastWord)) { // acesta poate fi pretul eg: 23.02 A 
                     $cost = floatval($secondLastWord);
-                    $article = $this->detectArticle($decodedLines, $line);
+                    $article = $this->detectArticle($decodedLines, $line, $secondLastWord);
                     if ($cost > 0 && $article) { // nu consideram promotii cu pret 0          
-                        $result[] = array_merge([ 'costTotal' => $cost ], $article);
+                        $result[] = array_merge($article, [ 'totalCost' => $cost ]);
                     }
                 }
             }
@@ -31,7 +31,7 @@ class OcrSpaceReceiptDecoder
         return $result;
     }
 
-    private function detectArticle($decodedLines, $articleCostLine)
+    private function detectArticle($decodedLines, $articleCostLine, $costStr)
     {        
         $verticalPos = intval($articleCostLine['MinTop'] ?? 0);
         $textHeight = intval($articleCostLine['MaxHeight'] ?? 0);
@@ -44,10 +44,11 @@ class OcrSpaceReceiptDecoder
         $minSearchVertical = $verticalPos - $errorMargin;
         $maxSearchVertical = $verticalPos + $textHeight + $errorMargin;
 
-        $costLineText = $articleCostLine['LineText'] ?? 'Unknown';
+        $costLineText = $articleCostLine['LineText'] ?? 'Unknown';        
         $articleName = '';
-        $articletNameCorrected = '';
+        $articleNameCorrected = '';
         $quantityText = '';
+        $quantityTextCorrected = '';
         $quantity = -1;
         foreach ($decodedLines as $line) {
             $lineTop = intval($line['MinTop'] ?? 0);
@@ -61,17 +62,33 @@ class OcrSpaceReceiptDecoder
                 if ($lineText && $lineWords) {
                     $correctedLineText = $this->getCorrectedLine($lineText, $lineWords);
                     if ($correctedLineText != $costLineText) {
-                        $articleName .= $lineText . ' ';
-                        $articletNameCorrected .= $correctedLineText . ' ';
+                        if (strpos($correctedLineText, $costStr) !== false) {
+                            $quantityText = $lineText;
+                            $quantityTextCorrected = $correctedLineText;
+                            $quantity = $this->detectQuantity($correctedLineText, $lineWords[0]);
+                        } else {
+                            $articleName .= $lineText . ' ';
+                            $articleNameCorrected .= $correctedLineText . ' ';
+                        }
                     }
-                }            
+                }
+            }
+            if (!empty($articleName) && $quantity > 0) {
+                break;
             }
         }
 
-        return [ 'nume' => trim($articleName), 'corectieNume' => trim($articletNameCorrected) ];
+        return [ 
+            'articleName' => trim($articleName), 
+            'articleNameCorrected' => trim($articleNameCorrected), 
+            'quantityText' =>  $quantityText,
+            'quantityTextCorrected' => $quantityTextCorrected,
+            'quantity' => $quantity
+        ];
     }
 
-    private function getCorrectedLine($lineText, $lineWords) {
+    private function getCorrectedLine($lineText, $lineWords)
+    {
         $correctedLine = $this->correctionController->getCorrectedLine($lineText);
         // if we do not have a correction in line, try a correction of words
         $correctedLineText = $correctedLine['corrected']
@@ -89,5 +106,26 @@ class OcrSpaceReceiptDecoder
         }
 
         return $correctedWords;
+    }
+
+    private function detectQuantity($correctedLineText, $quantityWord)
+    {
+        $quantity = 1;
+        if (!isset($quantityWord['WordText'])) {
+            return $quantity;
+        }
+
+        $firstWordCorrected = $this->correctionController->getCorrectedWord($quantityWord['WordText'])['result'];
+        if (is_numeric($firstWordCorrected)) {
+            $quantity = intval($firstWordCorrected);
+        } else {
+            $firstWord = strtok($correctedLineText, " ");
+            if (is_numeric($firstWord)) {
+                $quantity = intval($firstWord);
+                $this->correctionController->addCorrectedWord($quantityWord['WordText'], $firstWord);
+            }
+        }
+
+        return $quantity > 0 ? $quantity : 1;
     }
 }

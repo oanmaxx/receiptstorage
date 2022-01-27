@@ -13,6 +13,13 @@ class CorrectionController
         'Bluza 100 Gri Dana' => 'Bluza 100 Gri Dama',
     ];
 
+    public function addCorrectedWord($word, $correction)
+    {
+        if (!isset($existingWordCorrections[$word])) {
+            $existingWordCorrections[$word] = $correction;
+        }
+    }
+
     public function getCorrectedWord($word)
     {
         $correction = [];

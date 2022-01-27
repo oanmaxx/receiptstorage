@@ -36,6 +36,7 @@ class Upload
 
                 if (move_uploaded_file($_FILES["attachment"]["tmp_name"], $target_file)) {
                     $result = Engine::uploadToApi($target_file);
+                    unlink($target_file);
                 } else {
                     $result = "Eroare la incarcarea fisierului. Va rugam reincercati.";
                 }

@@ -26,15 +26,49 @@ class OcrSpaceFormatter
         return $tableResponse;
     }
 
-    private function formatDetectionForHtml($id, $value)
+    private function formatDetectionForHtml($id, $article)
     {
-        var_dump($value);
-        $idDetection = "detectie_" . $id;
-        $idAlias = "alias_" . $id;
-        $idIgnore = "ignora_" . $id;
-        $htmlResponse = '<td><label for="' . $idDetection . '">Detectie:</label><br><input class="detectionInput" type="text" id="' . $idDetection . '" value="'. $value['nume'] .'" readonly/></td>';
-        $htmlResponse .= '<td><label for="' . $idAlias . '">Salveaza ca:</label><br><input class="detectionInput" type="text" id="' . $idAlias . '" value="'. $value['corectieNume'] .'" /></td>';
+        $htmlResponse = '';
+        foreach($article as $key => $field) {
+            $baseId = $key . '_' . $id;
+            $htmlResponse .= '<td>';
+            $htmlResponse .= '<label for="' . $baseId . '">' . $this->getTranslation($key) . ':</label>';
+            $htmlResponse .= '<br>';
+            $readonly = (strstr($key, 'Corrected') == false ? 'readonly' : '');
+            $htmlResponse .= '<input class="detectionInput" type="text" id="' . $baseId . '" value="'. $field .'" '. $readonly .'/>';
+            $htmlResponse .= '</td>';
+        }        
     
         return $htmlResponse;
+    }
+
+    private function getTranslation($key)
+     {
+        $text = '';
+        switch($key) {
+            case 'totalCost':
+                $text = "Pret total";
+                break;
+            case 'articleName':
+                $text = 'Nume articol';
+                break;
+            case 'articleNameCorrected':
+                $text = 'Corectie nume articol';
+                break;
+            case 'quantityText':
+                $text = 'Cantitate';
+                break;
+            case 'quantityTextCorrected':
+                $text = 'Corectie cantitate';
+                break;
+            case 'quantity':
+                $text = 'Cantitate detectata';
+                break;
+            default:
+                $text = 'Detectie';
+                break;
+        }
+
+        return $text;
     }
 }
