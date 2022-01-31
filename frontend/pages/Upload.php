@@ -32,7 +32,7 @@ class Upload
 
             if (empty($result)) {
                 $target_dir = __DIR__ . "/../../uploads/";
-                $target_file = $target_dir . self::generateRandomString() . '.' . $FileType;                
+                $target_file = $target_dir . self::generateRandomString() . '.' . $FileType;
 
                 if (move_uploaded_file($_FILES["attachment"]["tmp_name"], $target_file)) {
                     $result = Engine::uploadToApi($target_file);

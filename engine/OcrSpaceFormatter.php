@@ -34,8 +34,7 @@ class OcrSpaceFormatter
             $htmlResponse .= '<td>';
             $htmlResponse .= '<label for="' . $baseId . '">' . $this->getTranslation($key) . ':</label>';
             $htmlResponse .= '<br>';
-            $readonly = (strstr($key, 'Corrected') == false ? 'readonly' : '');
-            $htmlResponse .= '<input class="detectionInput" type="text" id="' . $baseId . '" value="'. $field .'" '. $readonly .'/>';
+            $htmlResponse .= '<input class="detectionInput" type="text" id="' . $baseId . '" value="'. $field .'" readonly/>';
             $htmlResponse .= '</td>';
         }        
     

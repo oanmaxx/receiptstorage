@@ -16,19 +16,6 @@ class Engine
         return $result;
     }
 
-    private static function parseWithDummy($target_file)
-    {
-        $dummyData = DummyResponse::getDummyResponse3();
-        $response =  json_decode($dummyData,true);
-        if ($lines = $response['ParsedResults'][0]['Overlay']['Lines'] ?? null)
-        {
-            $result = self::formatToHtml($lines);
-        } else {
-            $result = 'Invalid Response';
-        }
-        return $result;
-    }
-
     private static function parseWithOCRSpace($target_file)
     {
         $result = '';
@@ -78,17 +65,9 @@ class Engine
                     'file' => $fileData
                 ]
             );
-            $response =  json_decode($r->getBody(),true);            
-            if (!isset($response['ErrorMessage']) || empty($response['ErrorMessage'])) {
-                if ($lines = $response['ParsedResults'][0]['Overlay']['Lines'] ?? null)
-                {
-                    $result = self::formatToHtml($lines);
-                } else {
-                    $result = 'Invalid Response';
-                }
-            } else {
-                $result = $response['ErrorMessage'];
-            }
+                
+            $result = self::parseResponse($r->getBody());
+
         } catch(Exception $err) {            
             $result = $err->getMessage();
         }
@@ -96,11 +75,33 @@ class Engine
         return $result;
     }
 
+    private static function parseWithDummy($target_file)
+    {
+        $target_file = strtolower($_FILES["attachment"]["name"]);
+        $dummyData = DummyResponse::getDummyData($target_file);
+
+        return self::parseResponse($dummyData);
+    }
+
+    private static function parseResponse($jsonData)
+    {
+        $response = json_decode($jsonData, true);
+        if (isset($response['ErrorMessage']) && !empty($response['ErrorMessage'])) {
+            return $response['ErrorMessage'];
+        }
+
+        $lines = isset($response['ParsedResults'][0]['TextOverlay']['Lines'])
+            ? $response['ParsedResults'][0]['TextOverlay']['Lines']
+            : ($response['ParsedResults'][0]['Overlay']['Lines'] ?? null);
+        
+        return $lines ? self::formatToHtml($lines) : 'Invalid Response';  
+    }
+
     private static function formatToHtml($decodedLines)
     {
-        $decoder = new OcrSpaceReceiptDecoder();
+        $decoder = new OcrSpaceReceiptDecoder($decodedLines);
         $storeName = '';
-        $articles = $decoder->getArticles($decodedLines);
+        $articles = $decoder->getArticles();
         $totalSum = 0;
         
         $formatter = new OcrSpaceFormatter();
