@@ -6,6 +6,8 @@ class CorrectionController
         'BIC' => 'BUC',
         '1.C00' => '1.000',
         'C00' => '1.000',
+        'SPRESSU' => 'ESPRESSO',
+        'BuICX' => 'BUC X',
     ];
 
     private $existingLineCorrections = [
@@ -22,29 +24,17 @@ class CorrectionController
 
     public function getCorrectedWord($word)
     {
-        $correction = [];
         if (isset($this->existingWordCorrections[$word])) {
-            $correction['corrected'] = true;
-            $correction['result'] = $this->existingWordCorrections[$word];
-        } else {
-            $correction['corrected'] = false;
-            $correction['result'] = $word;
+            return $this->existingWordCorrections[$word];
         }
-
-        return $correction;
+        return null;
     }
 
     public function getCorrectedLine($line)
     {
-        $correction = [];
         if (isset($this->existingLineCorrections[$line])) {
-            $correction['corrected'] = true;
-            $correction['result'] = $this->existingLineCorrections[$line];
-        } else {
-            $correction['corrected'] = false;
-            $correction['result'] = $line;
+            return $this->existingLineCorrections[$line];
         }
-
-        return $correction;
+        return null;
     }
 }

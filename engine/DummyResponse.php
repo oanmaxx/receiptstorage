@@ -11,8 +11,8 @@ require_once __DIR__ . '/dummy_data/DummyCarrefour.php';
 class DummyResponse
 {
     public function getDummyData($fileName)
-    {
-        if ($fileName === 'yummyYang_bon_1.png') {
+    {        
+        if ($fileName === 'yummyyang_bon_1.png') {
             return DummyYummyYang::getDummyResponse1();
         } else if ($fileName ==='decathlon_bon_1.png') {
             return DummyDecathlon::getDummyResponse1();
@@ -24,7 +24,7 @@ class DummyResponse
             return DummyNarcoffee::getDummyResponse1();
         } else if ($fileName === 'caro_bon_1.png') {
             return DummyCaro::getDummyResponse1();
-        } else if ($fileName === 'lunchBox_bon_1.png') {
+        } else if ($fileName === 'lunchbox_bon_1.png') {
             return DummyLunchBox::getDummyResponse1();
         } else if ($fileName === 'mega_bon_1.png') {
             return DummyMega::getDummyResponse1();

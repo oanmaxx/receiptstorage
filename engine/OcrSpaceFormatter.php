@@ -1,5 +1,7 @@
 <?php
 
+require_once 'OcrSpaceCommon.php';
+
 class OcrSpaceFormatter
 {
     public function formatResultTable($storeName, $articles, $totalSum)
@@ -11,9 +13,7 @@ class OcrSpaceFormatter
         
         $i = 1;
         foreach($articles as $article) {
-            $tableResponse .= '<tr>' . $this->formatDetectionForHtml($i, $article);
-
-            $tableResponse .= '</tr>';
+            $tableResponse .= $this->formatDetectionForHtml($i, $article);
             if ($i++ > 10000) {
                 break;
             }            
@@ -29,14 +29,26 @@ class OcrSpaceFormatter
     private function formatDetectionForHtml($id, $article)
     {
         $htmlResponse = '';
+        if (isset($article[OcrSpaceCommon::LINE])) {
+            $htmlResponse .= '<tr><td colspan="'. count($article) . '">';
+            $htmlResponse .= '<label>Detectie: '. $article[OcrSpaceCommon::LINE] .'</label>';
+            $htmlResponse .= '</td></tr>';
+        }
+
+        $htmlResponse .= '<tr>';
         foreach($article as $key => $field) {
             $baseId = $key . '_' . $id;
+            if ($key == OcrSpaceCommon::LINE) {
+                continue;
+            }
+
             $htmlResponse .= '<td>';
             $htmlResponse .= '<label for="' . $baseId . '">' . $this->getTranslation($key) . ':</label>';
             $htmlResponse .= '<br>';
             $htmlResponse .= '<input class="detectionInput" type="text" id="' . $baseId . '" value="'. $field .'" readonly/>';
             $htmlResponse .= '</td>';
         }        
+        $htmlResponse .= '</tr>';
     
         return $htmlResponse;
     }
@@ -45,22 +57,22 @@ class OcrSpaceFormatter
      {
         $text = '';
         switch($key) {
-            case 'totalCost':
+            case OcrSpaceCommon::TOTAL_COST:
                 $text = "Pret total";
                 break;
-            case 'articleName':
+            case OcrSpaceCommon::ARTICLE_NAME:
                 $text = 'Nume articol';
                 break;
-            case 'articleNameCorrected':
+            case OcrSpaceCommon::ARTICLE_NAME_CORRECTED:
                 $text = 'Corectie nume articol';
                 break;
-            case 'quantityText':
+            case OcrSpaceCommon::QUANTITY_TEXT:
                 $text = 'Cantitate';
                 break;
-            case 'quantityTextCorrected':
+            case OcrSpaceCommon::QUANTITY_TEXT_CORRECTED;
                 $text = 'Corectie cantitate';
                 break;
-            case 'quantity':
+            case OcrSpaceCommon::QUANTITY:
                 $text = 'Cantitate detectata';
                 break;
             default:

@@ -89,11 +89,11 @@ class Engine
         if (isset($response['ErrorMessage']) && !empty($response['ErrorMessage'])) {
             return $response['ErrorMessage'];
         }
-
+        
         $lines = isset($response['ParsedResults'][0]['TextOverlay']['Lines'])
             ? $response['ParsedResults'][0]['TextOverlay']['Lines']
             : ($response['ParsedResults'][0]['Overlay']['Lines'] ?? null);
-        
+                    
         return $lines ? self::formatToHtml($lines) : 'Invalid Response';  
     }
 
