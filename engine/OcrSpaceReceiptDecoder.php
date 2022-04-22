@@ -1,81 +1,104 @@
 <?php
 
 require_once 'OcrSpaceCommon.php';
+require_once 'CorrectionController.php';
 
 class OcrSpaceReceiptDecoder
 {
     private $correctionController;
     private $ocrLines;
+    private $otherPossibleArticles;
 
     public function __construct($decodedLines)
     {
         $this->correctionController = new CorrectionController();
 
         $this->ocrLines = $this->aggregateLinesWithSimilarHeight($decodedLines);
+        $this->otherPossibleArticles = [];
     }
 
     public function getArticles()
     {
         $result = [];
-        $lineCount = count($this->ocrLines);        
+        $lineCount = count($this->ocrLines);
         for ($idx = 0; $idx < $lineCount; $idx++) {
             $line = $this->ocrLines[$idx];
             $lineWords = explode(' ', $line);
             $correctedWords = $this->getCorrectedWords($lineWords);
-            $price = $this->extractArticlePrice($correctedWords);
-            if ($price > 0) { // avem o linie care contine pretul unui articol
+            $cost = $this->extractArticleCost($correctedWords);
+            if (!empty($cost)) { // avem o linie care contine pretul unui articol
+                $articleResult = null;
+
                 $presumedArticleWords = [];
                 foreach($correctedWords as $articleWord) {
                     $presumedArticleWords[] = $articleWord;
                 }
-
+                
                 $quantity = $this->extractQuantity($presumedArticleWords);
-                if ($quantity) {
+                if (!empty($quantity)) {
                     $articleWordsCount = count($presumedArticleWords);
-                    $articleWords = array_slice($lineWords, 0, $articleWordsCount);
-                    $quantityWords = array_slice($lineWords, $articleWordsCount);
-
+                    $articleWords = array_slice($correctedWords, 0, $articleWordsCount);                    
                     $articleStr = implode(' ', $articleWords);
-                    $articleStrCorrected = implode(' ', $presumedArticleWords);
-                    $quantityStr = implode(' ', $quantityWords);
-                    $quantityStrCorrected = implode(' ', $quantityWords);
-                    $resultArticle = [
-                        OcrSpaceCommon::LINE => $line,
+                    $finalLine = sprintf("%s %s = %s (%s)", $articleStr, $quantity['lineText'], $cost['price'], $cost['type']);
+                    $articleResult = [
+                        OcrSpaceCommon::LINE => $finalLine,
                         OcrSpaceCommon::ARTICLE_NAME => $articleStr,
-                        OcrSpaceCommon::ARTICLE_NAME_CORRECTED => $articleStrCorrected,
-                        OcrSpaceCommon::QUANTITY_TEXT => $quantity,
-                        OcrSpaceCommon::QUANTITY_TEXT_CORRECTED => $quantity,
-                        OcrSpaceCommon::QUANTITY => $quantity,
-                        OcrSpaceCommon::TOTAL_COST => $price
+                        OcrSpaceCommon::QUANTITY_TEXT => $quantity['lineText'],
+                        OcrSpaceCommon::QUANTITY => floatval($quantity['quantity']),
+                        OcrSpaceCommon::TOTAL_COST => floatval($cost['price'])
                     ];                    
-                } else {
-                    $resultArticle = [
-                        OcrSpaceCommon::LINE => $line
-                    ];
+                } else if (!empty($presumedArticleWords)) {
+                    $prevLine = $this->ocrLines[$idx-1];
+                    $prevLineWords = explode(' ', $prevLine);
+                    $correctedPrevLineWords = $this->getCorrectedWords($prevLineWords);
+                    $quantity = $this->extractQuantity($correctedPrevLineWords);
+                    if (!empty($quantity)) {
+                        $articleStr = implode(' ', $presumedArticleWords);
+                        $finalLine = sprintf("%s %s = %s (%s)", $articleStr, $quantity['lineText'], $cost['price'], $cost['type']);
+                        $articleResult = [
+                            OcrSpaceCommon::LINE => $finalLine,
+                            OcrSpaceCommon::ARTICLE_NAME => $articleStr,
+                            OcrSpaceCommon::QUANTITY_TEXT => $quantity['lineText'],
+                            OcrSpaceCommon::QUANTITY => floatval($quantity['quantity']),
+                            OcrSpaceCommon::TOTAL_COST => floatval($cost['price'])
+                        ];
+                    }
                 }
 
-                $result[] = $resultArticle;
+                if (!is_null($articleResult)) {
+                    $result[] = $articleResult;
+                } else {
+                    $this->otherPossibleArticles[] = $line;
+                }
             }
         }
+
+        // var_dump($this->otherPossibleArticles);
 
         return $result;
     }
 
-    private function extractArticlePrice(&$lineWords)
+    private function extractArticleCost(&$lineWords)
     {
-        $cost = 0;
+        $cost = [];
         $wordCount = count($lineWords);
         if ($wordCount > 2) {
             $lastWord = array_pop($lineWords);
             if (strlen($lastWord) == 1) {   // tipul articolului
                 $secondLastWord = array_pop($lineWords);
                 if (OcrSpaceCommon::stringIsNumber($secondLastWord)) {  // acesta poate fi pretul eg: 23.02 A 
-                    $cost = floatval(OcrSpaceCommon::toNumber($secondLastWord));
+                    $cost = [
+                        'type' => $lastWord,
+                        'price' => OcrSpaceCommon::toNumber($secondLastWord)
+                    ];
                 }
             } else { // tipul articolului poate fi alipit de pret
                 $presumedCost = substr($lastWord, 0, strlen($lastWord) - 2);
                 if (OcrSpaceCommon::stringIsNumber($presumedCost)) {
-                    $cost = floatval(OcrSpaceCommon::toNumber($presumedCost));
+                    $cost = [
+                        'type' => $lastWord,
+                        'price' => OcrSpaceCommon::toNumber($presumedCost)
+                    ];
                     array_pop($lineWords);
                 }
             }
@@ -101,12 +124,21 @@ class OcrSpaceReceiptDecoder
             $lastWord = $lineWords[$wordsCount - 1];
         }
 
-        $quantity = 0;
+        $quantity = [];
         $presumedUnitPrice = $lineWords[$wordsCount - 1];
         $presumedOrder = $lineWords[$wordsCount - 2];
-        $presumedQuantity = $lineWords[$wordsCount - 4];        
+        $presumedUnitType = $lineWords[$wordsCount - 3];
+        $presumedQuantity = $lineWords[$wordsCount - 4];
+        
         if (strtolower($presumedOrder) == 'x' && OcrSpaceCommon::stringIsNumber($presumedUnitPrice) && OcrSpaceCommon::stringIsNumber($presumedQuantity)) {
-            $quantity = floatval(OcrSpaceCommon::toNumber($presumedQuantity));
+            $quantity = OcrSpaceCommon::toNumber($presumedQuantity);
+            $unitPrice = OcrSpaceCommon::toNumber($presumedUnitPrice);
+            $quantity = [
+                'lineText' => sprintf("%s %s X %s", $quantity, $presumedUnitType, $unitPrice),
+                'unitprice' => $presumedUnitPrice,
+                'unittype' => $unitPrice,
+                'quantity' => $quantity
+            ] ;
             array_pop($lineWords);
             array_pop($lineWords);
             array_pop($lineWords);

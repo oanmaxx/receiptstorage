@@ -1072,4 +1072,39 @@ return
 }
 ';   
     }
+
+
+	public static function getDummyExpectation1()
+	{
+		return [
+			[
+				OcrSpaceCommon::LINE => 'F.MIFEN PUI 1 BUC X 18.00 = 18.00 (C)',
+				OcrSpaceCommon::ARTICLE_NAME => 'F.MIFEN PUI',
+				OcrSpaceCommon::QUANTITY_TEXT => '1 BUC X 18.00',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '18'
+			],
+			[
+				OcrSpaceCommon::LINE => 'CASEROLA 3 BUC X 1.00 = 3.00 (A)',
+				OcrSpaceCommon::ARTICLE_NAME => 'CASEROLA',
+				OcrSpaceCommon::QUANTITY_TEXT => '3 BUC X 1.00',
+				OcrSpaceCommon::QUANTITY => '3',
+				OcrSpaceCommon::TOTAL_COST => '3'
+			],
+			[
+				OcrSpaceCommon::LINE => 'F.PUI CHILLY 1 BLUIC X 14.00 = 14.00 (C)',
+				OcrSpaceCommon::ARTICLE_NAME => 'F.PUI CHILLY',
+				OcrSpaceCommon::QUANTITY_TEXT => '1 BLUIC X 14.00',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '14'
+			],
+			[
+				OcrSpaceCommon::LINE => 'ZF.CREUE TI PANKO 1 BUC X 28.00 = 28.00 (C)',
+				OcrSpaceCommon::ARTICLE_NAME => 'ZF.CREUE TI PANKO',
+				OcrSpaceCommon::QUANTITY_TEXT => '1 BUC X 28.00',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '28'
+			]
+		];
+	}
 }

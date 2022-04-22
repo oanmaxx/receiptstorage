@@ -4503,4 +4503,25 @@ return '{
   }
 ';
     }
+
+    public static function getDummyExpectation1()
+    {
+      return [
+
+      ];
+    }
+
+    public static function getDummyExpectation2()
+    {
+      return [
+
+      ];
+    }
+
+    public static function getDummyExpectation3()
+    {
+      return [
+
+      ];
+    }
 }

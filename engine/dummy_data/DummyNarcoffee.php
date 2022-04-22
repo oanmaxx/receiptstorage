@@ -952,4 +952,31 @@ return
 }
 ';   
     }
+
+	public static function getDummyExpectation1()
+	{
+		return [
+			[
+				OcrSpaceCommon::LINE => 'AMERICANO TOG0 1 BUC X 7.00 = 7.00 (B)',
+				OcrSpaceCommon::ARTICLE_NAME => 'AMERICANO TOG0',
+				OcrSpaceCommon::QUANTITY_TEXT => '1 BUC X 7.00',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '7'
+			],
+			[
+				OcrSpaceCommon::LINE => 'MELLOW 1 BULC X 13.00 = 13.00 (B)',
+				OcrSpaceCommon::ARTICLE_NAME => 'MELLOW',
+				OcrSpaceCommon::QUANTITY_TEXT => '1 BULC X 13.00',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '13'
+			],
+			[
+				OcrSpaceCommon::LINE => 'CAPPUCCINO TOGO 1 BUC X 10.00 = 10.00 (B)',
+				OcrSpaceCommon::ARTICLE_NAME => 'CAPPUCCINO',
+				OcrSpaceCommon::QUANTITY_TEXT => '1 BLUIC X 14.00',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '14'
+			]
+		];
+	}
 }

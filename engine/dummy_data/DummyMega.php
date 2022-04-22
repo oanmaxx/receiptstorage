@@ -1457,4 +1457,59 @@ return
 }
 ';   
     }
+
+	public static function getDummyExpectation1()
+    {
+		return [
+			[
+				OcrSpaceCommon::LINE => 'EC CAJU CRUD 50G 2.000 BUC. X 4.49 = 8.93 (B)',
+				OcrSpaceCommon::ARTICLE_NAME => 'EC CAJU CRUD 50G',
+				OcrSpaceCommon::QUANTITY_TEXT => '2.000 BUC. X 4.49',
+				OcrSpaceCommon::QUANTITY => '2',
+				OcrSpaceCommon::TOTAL_COST => '8.93'
+			],
+			[
+				OcrSpaceCommon::LINE => 'BISC CIUCO LAPT150 2.000 BUC. X 9.400 = 18.80 (B)',
+				OcrSpaceCommon::ARTICLE_NAME => 'BISC CIUCO LAPT150',
+				OcrSpaceCommon::QUANTITY_TEXT => '2.000 BUC. X 9.400',
+				OcrSpaceCommon::QUANTITY => '2',
+				OcrSpaceCommon::TOTAL_COST => '18.8'
+			],
+			[
+				OcrSpaceCommon::LINE => 'LAY S SARE 1256 1.000 BUC. X 6.10 = 6.10 (B)',
+				OcrSpaceCommon::ARTICLE_NAME => 'LAY S SARE 1256',
+				OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC. X 6.10',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '6.1'
+			],
+			[
+				OcrSpaceCommon::LINE => 'FRANZ ALBA FEL700G 1.000 BUC. X 4.00 = 4.00 (B)',
+				OcrSpaceCommon::ARTICLE_NAME => 'FRANZ ALBA FEL700G',
+				OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC. X 4.00',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '4'
+			],
+			[
+				OcrSpaceCommon::LINE => 'IAURT PIERSICI 125G 2.000 BUC. X 1.89 = 3.78 (B)',
+				OcrSpaceCommon::ARTICLE_NAME => 'IAURT PIERSICI 125G',
+				OcrSpaceCommon::QUANTITY_TEXT => '2.000 BUC. X 1.89',
+				OcrSpaceCommon::QUANTITY => '2',
+				OcrSpaceCommon::TOTAL_COST => '3.78'
+			],
+			[
+				OcrSpaceCommon::LINE => 'IAURT CIRESE SOUG 1.000 BUC. X 6.89 = 6.89 (B)',
+				OcrSpaceCommon::ARTICLE_NAME => 'IAURT CIRESE SOUG',
+				OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC. X 6.89',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '6.89'
+			],
+			[
+				OcrSpaceCommon::LINE => 'SACOSA BIODEG SG 1.000 BUC. X 0.70 = 0.70 (A)',
+				OcrSpaceCommon::ARTICLE_NAME => 'SACOSA BIODEG SG',
+				OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC. X 0.70',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '0.7'
+			]
+		];
+    }
 }

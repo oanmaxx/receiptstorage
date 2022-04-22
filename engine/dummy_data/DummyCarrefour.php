@@ -1114,4 +1114,11 @@ return
 }
 ';   
     }
+
+	public static function getDummyExpectation1()
+    {
+      return [
+
+      ];
+    }
 }

@@ -63,14 +63,8 @@ class OcrSpaceFormatter
             case OcrSpaceCommon::ARTICLE_NAME:
                 $text = 'Nume articol';
                 break;
-            case OcrSpaceCommon::ARTICLE_NAME_CORRECTED:
-                $text = 'Corectie nume articol';
-                break;
             case OcrSpaceCommon::QUANTITY_TEXT:
                 $text = 'Cantitate';
-                break;
-            case OcrSpaceCommon::QUANTITY_TEXT_CORRECTED;
-                $text = 'Corectie cantitate';
                 break;
             case OcrSpaceCommon::QUANTITY:
                 $text = 'Cantitate detectata';

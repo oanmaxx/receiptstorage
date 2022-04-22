@@ -4,10 +4,14 @@ class CorrectionController
 {
     private $existingWordCorrections = [
         'BIC' => 'BUC',
+        'BI' => 'BUC',
         '1.C00' => '1.000',
         'C00' => '1.000',
         'SPRESSU' => 'ESPRESSO',
         'BuICX' => 'BUC X',
+        '1.003.00' => '1.00 3.00',
+        'AIYERICANO' => 'AMERICANO',
+        'CPPUCCIND' => 'CAPPUCINO',
     ];
 
     private $existingLineCorrections = [
