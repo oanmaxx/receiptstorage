@@ -122,8 +122,16 @@ class OcrSpaceReceiptDecoder
 
         $quantity = [];
         $presumedUnitPrice = $lineWords[$wordsCount - 1];
-        $presumedUnitType = $lineWords[$wordsCount - 3];
-        $presumedQuantity = $lineWords[$wordsCount - 4];
+        $offset = 0;
+        if ($presumedUnitPrice === 'LEI' || $presumedUnitPrice === 'RON') {
+            if ($wordsCount < 5) {
+                return 0;
+            }
+            $presumedUnitPrice = $lineWords[$wordsCount - 2];
+            $offset++;
+        }
+        $presumedUnitType = $lineWords[$wordsCount - (3 + $offset)];
+        $presumedQuantity = $lineWords[$wordsCount - (4 + $offset)];
         
         if (OcrSpaceCommon::stringIsNumber($presumedUnitPrice) && OcrSpaceCommon::stringIsNumber($presumedQuantity)) {
             $quantity = [
