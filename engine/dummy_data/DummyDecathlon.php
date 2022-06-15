@@ -4507,21 +4507,109 @@ return '{
     public static function getDummyExpectation1()
     {
       return [
-
+        [
+          OcrSpaceCommon::ORIGINAL_LINE => '1.000 BUC x 79.99 Pantalon Stepa 300 W 79.99 A',
+          OcrSpaceCommon::ARTICLE_NAME => 'Pantalon Stepa 300 W',
+          OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC X 79.99',
+          OcrSpaceCommon::QUANTITY => '1',
+          OcrSpaceCommon::TOTAL_COST => '79.99'
+        ],
+        [
+          OcrSpaceCommon::ORIGINAL_LINE => '1.000 BUC x 39,99 Colanti 100 Verde 39.99 A',
+          OcrSpaceCommon::ARTICLE_NAME => 'Colanti 100 Verde',
+          OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC X 39.99',
+          OcrSpaceCommon::QUANTITY => '1',
+          OcrSpaceCommon::TOTAL_COST => '39.99'
+        ],
+        [
+          OcrSpaceCommon::ORIGINAL_LINE => '1.000 BUC x 39.99 TREK LINER WOOL 5000 39.99 A',
+          OcrSpaceCommon::ARTICLE_NAME => 'TREK LINER WOOL 5000',
+          OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC X 39.99',
+          OcrSpaceCommon::QUANTITY => '1',
+          OcrSpaceCommon::TOTAL_COST => '39.99'
+        ],
+        [
+          OcrSpaceCommon::ORIGINAL_LINE => '1.000 BUC x 44.99 Sapca Caola 100 44.99 A',
+          OcrSpaceCommon::ARTICLE_NAME => 'Sapca Caola 100',
+          OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC X 44.99',
+          OcrSpaceCommon::QUANTITY => '1',
+          OcrSpaceCommon::TOTAL_COST => '44.99'
+        ]
       ];
     }
 
     public static function getDummyExpectation2()
     {
       return [
-
+        [
+          OcrSpaceCommon::ORIGINAL_LINE => '1.000 BUC x 49.99 BRS5O0D CAMD KBR 49.99 A',
+          OcrSpaceCommon::ARTICLE_NAME => 'BRS5O0D CAMD KBR',
+          OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC X 49.99',
+          OcrSpaceCommon::QUANTITY => '1',
+          OcrSpaceCommon::TOTAL_COST => '49.99'
+        ],
+        [
+          OcrSpaceCommon::ORIGINAL_LINE => '1.U00 BUC x 49.99 sd ResPIaita 10 49.99 A',
+          OcrSpaceCommon::ARTICLE_NAME => 'sd ResPIaita 10',
+          OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC X 49.99',
+          OcrSpaceCommon::QUANTITY => '1',
+          OcrSpaceCommon::TOTAL_COST => '49.99'
+        ],
+        [
+          OcrSpaceCommon::ORIGINAL_LINE => '1.UU0 BUC X 74.99 BERMUDA SG500 CAMO W 74.99 A',
+          OcrSpaceCommon::ARTICLE_NAME => 'BERMUDA SG500 CAMO W',
+          OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC X 74.99',
+          OcrSpaceCommon::QUANTITY => '1',
+          OcrSpaceCommon::TOTAL_COST => '74.99'
+        ],
+        [
+          OcrSpaceCommon::ORIGINAL_LINE => '1.000 BUC X 24.99 SG100 GHEEN 24.99 A',
+          OcrSpaceCommon::ARTICLE_NAME => 'SG100 GHEEN',
+          OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC X 24.99',
+          OcrSpaceCommon::QUANTITY => '1',
+          OcrSpaceCommon::TOTAL_COST => '24.99'
+        ],
+        [
+          OcrSpaceCommon::ORIGINAL_LINE => 'UUU BUC X 3,49 SACOSA REUTILIZABILA 3.49 A',
+          OcrSpaceCommon::ARTICLE_NAME => 'SACOSA REUTILIZABILA',
+          OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC X 3.49',
+          OcrSpaceCommon::QUANTITY => '1',
+          OcrSpaceCommon::TOTAL_COST => '3.49'
+        ]
       ];
     }
 
     public static function getDummyExpectation3()
     {
       return [
-
+        [
+          OcrSpaceCommon::ORIGINAL_LINE => '1.000 BUC x 24.99 Bluza 100 Gri Dana 24.99 A',
+          OcrSpaceCommon::ARTICLE_NAME => 'Bluza 100 Gri Dana',
+          OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC X 24.99',
+          OcrSpaceCommon::QUANTITY => '1',
+          OcrSpaceCommon::TOTAL_COST => '24.99'
+        ],
+        [
+          OcrSpaceCommon::ORIGINAL_LINE => 'C00 BUCx 21.99 T-SHIRT 500 REG PILA 21.99 A',
+          OcrSpaceCommon::ARTICLE_NAME => 'T-SHIRT 500 REG PILA',
+          OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC X 21.99',
+          OcrSpaceCommon::QUANTITY => '1',
+          OcrSpaceCommon::TOTAL_COST => '21.99'
+        ],
+        [
+          OcrSpaceCommon::ORIGINAL_LINE => '1.000 BUC X 24.99 TANK GYM 500 PRINT 24.99 A',
+          OcrSpaceCommon::ARTICLE_NAME => 'TANK GYM 500 PRINT',
+          OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC X 24.99',
+          OcrSpaceCommon::QUANTITY => '1',
+          OcrSpaceCommon::TOTAL_COST => '24.99'
+        ],
+        [
+          OcrSpaceCommon::ORIGINAL_LINE => '1.C00 BIC X 129.99 M 3S SJ SHD BLAK H 129.99 A',
+          OcrSpaceCommon::ARTICLE_NAME => 'M 3S SJ SHD BLAK H',
+          OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC X 129.99',
+          OcrSpaceCommon::QUANTITY => '1',
+          OcrSpaceCommon::TOTAL_COST => '129.99'
+        ]
       ];
     }
 }

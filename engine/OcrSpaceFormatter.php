@@ -29,16 +29,16 @@ class OcrSpaceFormatter
     private function formatDetectionForHtml($id, $article)
     {
         $htmlResponse = '';
-        if (isset($article[OcrSpaceCommon::LINE])) {
+        if (isset($article[OcrSpaceCommon::ORIGINAL_LINE])) {
             $htmlResponse .= '<tr><td colspan="'. count($article) . '">';
-            $htmlResponse .= '<label>Detectie: '. $article[OcrSpaceCommon::LINE] .'</label>';
+            $htmlResponse .= '<label>Detectie: '. $article[OcrSpaceCommon::ORIGINAL_LINE] .'</label>';
             $htmlResponse .= '</td></tr>';
         }
 
         $htmlResponse .= '<tr>';
         foreach($article as $key => $field) {
             $baseId = $key . '_' . $id;
-            if ($key == OcrSpaceCommon::LINE) {
+            if ($key == OcrSpaceCommon::ORIGINAL_LINE) {
                 continue;
             }
 

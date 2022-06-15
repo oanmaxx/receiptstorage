@@ -1116,9 +1116,71 @@ return
     }
 
 	public static function getDummyExpectation1()
-    {
-      return [
-
-      ];
-    }
+	{
+		return [
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => '0.656 Kg x, 15.90 CIOLAN AFUMAT SERGIA 10.43 B',
+				OcrSpaceCommon::ARTICLE_NAME => 'CIOLAN AFUMAT SERGIA',
+				OcrSpaceCommon::QUANTITY_TEXT => '0.656 Kg X 15.90',
+				OcrSpaceCommon::QUANTITY => '0.656',
+				OcrSpaceCommon::TOTAL_COST => '10.43'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => '1,000 BLICX 0.10 PUNGA BARIERA 31X41 0.10 A',
+				OcrSpaceCommon::ARTICLE_NAME => 'PUNGA BARIERA 31X41',
+				OcrSpaceCommon::QUANTITY_TEXT => '1.000 PLIC X 0.10',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '0.1'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => '1.000 BLIC x 3.99 LAPIE ONDENSAT UCI 3.99 B',
+				OcrSpaceCommon::ARTICLE_NAME => 'LAPIE ONDENSAT UCI',
+				OcrSpaceCommon::QUANTITY_TEXT => '1.000 BLIC X 3.99',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '3.99'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => '1.00 BIC X 3.99 LAPTE CONDENSAT ULCI 3.99 B',
+				OcrSpaceCommon::ARTICLE_NAME => 'LAPTE CONDENSAT ULCI',
+				OcrSpaceCommon::QUANTITY_TEXT => '1.00 BUC X 3.99',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '3.99'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => '1.000 BuICX 1.29 SACOSA MATEU MARE BI 1.29 A',
+				OcrSpaceCommon::ARTICLE_NAME => 'SACOSA MATEU MARE BUC',
+				OcrSpaceCommon::QUANTITY_TEXT => '1.000 BUC X 1.29',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '1.29'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => '1.000 BLIC X 13,45 BAUTURA SOIA 1L BARI 13.45 B',
+				OcrSpaceCommon::ARTICLE_NAME => 'BAUTURA SOIA 1L BARI',
+				OcrSpaceCommon::QUANTITY_TEXT => '1.000 BLIC X 13.45',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '13.45'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => '1.000 BLIC X 11.99 PORTOCALE 2KG 11.99 B',
+				OcrSpaceCommon::ARTICLE_NAME => 'PORTOCALE 2KG',
+				OcrSpaceCommon::QUANTITY_TEXT => '1.000 BLIC X 11.99',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '11.99'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => '1.000 BuIC X 11.99 CASCAVAL IMPL.AFUM.3 11.99 B',
+				OcrSpaceCommon::ARTICLE_NAME => 'CASCAVAL IMPL.AFUM.3',
+				OcrSpaceCommon::QUANTITY_TEXT => '1.000 BuIC X 11.99',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '11.99'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => '1.C00 BRC X 6,99 ROSIT CERRY L 250G b.99 B',
+				OcrSpaceCommon::ARTICLE_NAME => 'ROSIT CERRY L 250G',
+				OcrSpaceCommon::QUANTITY_TEXT => '1.000 BRC X 6.99',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '6.99'
+			]
+		];
+	}
 }

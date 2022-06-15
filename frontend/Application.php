@@ -15,7 +15,7 @@ class Application
         //ob_start();
 
         $pageContent = $this->htmlStart();
-        
+
         if (isset($_POST['action']) && $_POST['action'] == 'uploadReceipt') {
             $pageContent .= Upload::getPage();
         } else {

@@ -187,39 +187,32 @@ return
 						"MinTop": 354.1666564941406
 					},
 					{
-						"LineText": "TI ADUC NUNAT AVANTAJE",
+						"LineText": "IADUC NUMAT AVANTAJE",
 						"Words": [
 							{
-								"WordText": "TI",
-								"Left": 6.666666507720947,
-								"Top": 388.33331298828127,
-								"Height": 24.999998092651368,
-								"Width": 33.33333206176758
+								"WordText": "IADUC",
+								"Left": 0.8333333134651184,
+								"Top": 389.9999694824219,
+								"Height": 29.999998092651368,
+								"Width": 115.83332824707031
 							},
 							{
-								"WordText": "ADUC",
-								"Left": 59.999996185302737,
-								"Top": 388.33331298828127,
-								"Height": 24.999998092651368,
-								"Width": 53.33333206176758
-							},
-							{
-								"WordText": "NUNAT",
-								"Left": 130.0,
-								"Top": 388.33331298828127,
-								"Height": 24.999998092651368,
-								"Width": 65.0
+								"WordText": "NUMAT",
+								"Left": 120.83332824707031,
+								"Top": 389.9999694824219,
+								"Height": 29.999998092651368,
+								"Width": 80.83332824707031
 							},
 							{
 								"WordText": "AVANTAJE",
 								"Left": 214.99998474121095,
-								"Top": 388.33331298828127,
-								"Height": 24.999998092651368,
+								"Top": 389.9999694824219,
+								"Height": 23.333332061767579,
 								"Width": 108.33332824707031
 							}
 						],
-						"MaxHeight": 24.999998092651368,
-						"MinTop": 388.33331298828127
+						"MaxHeight": 29.999998092651368,
+						"MinTop": 389.9999694824219
 					},
 					{
 						"LineText": "CERE UN CARD LA CASA.",
@@ -345,21 +338,35 @@ return
 						"Words": [
 							{
 								"WordText": "1",
-								"Left": 124.16666412353516,
-								"Top": 550.0,
-								"Height": 31.66666603088379,
-								"Width": 18.333332061767579
+								"Left": 130.0,
+								"Top": 550.8333129882813,
+								"Height": 25.833332061767579,
+								"Width": 7.499999523162842
 							},
 							{
 								"WordText": "BUC",
-								"Left": 152.5,
-								"Top": 550.0,
-								"Height": 31.66666603088379,
-								"Width": 44.166664123535159
+								"Left": 157.5,
+								"Top": 549.1666259765625,
+								"Height": 26.66666603088379,
+								"Width": 40.0
 							}
 						],
-						"MaxHeight": 31.66666603088379,
+						"MaxHeight": 26.66666603088379,
 						"MinTop": 550.0
+					},
+					{
+						"LineText": "X",
+						"Words": [
+							{
+								"WordText": "X",
+								"Left": 228.3333282470703,
+								"Top": 553.3333129882813,
+								"Height": 22.5,
+								"Width": 11.666666030883789
+							}
+						],
+						"MaxHeight": 22.5,
+						"MinTop": 553.3333129882813
 					},
 					{
 						"LineText": "1,00",
@@ -411,25 +418,32 @@ return
 						"MinTop": 584.1666259765625
 					},
 					{
-						"LineText": "1 BUCX",
+						"LineText": "1 BUC X",
 						"Words": [
 							{
 								"WordText": "1",
-								"Left": 127.49999237060547,
-								"Top": 615.0,
-								"Height": 30.833332061767579,
-								"Width": 26.66666603088379
+								"Left": 130.0,
+								"Top": 615.8333129882813,
+								"Height": 25.833332061767579,
+								"Width": 8.333333015441895
 							},
 							{
-								"WordText": "BUCX",
-								"Left": 155.8333282470703,
-								"Top": 615.0,
-								"Height": 30.833332061767579,
-								"Width": 88.33332824707031
+								"WordText": "BUC",
+								"Left": 158.3333282470703,
+								"Top": 615.8333129882813,
+								"Height": 25.833332061767579,
+								"Width": 40.0
+							},
+							{
+								"WordText": "X",
+								"Left": 229.16665649414063,
+								"Top": 616.6666259765625,
+								"Height": 24.999998092651368,
+								"Width": 11.666666030883789
 							}
 						],
-						"MaxHeight": 30.833332061767579,
-						"MinTop": 615.0
+						"MaxHeight": 25.833332061767579,
+						"MinTop": 615.8333129882813
 					},
 					{
 						"LineText": "AMBALAJ-FEL DOI/CIORBA",
@@ -1056,26 +1070,61 @@ return
 					}
 				],
 				"HasOverlay": true,
-				"Message": "Total lines: 46"
+				"Message": "Total lines: 47"
 			},
 			"TextOrientation": "0",
 			"FileParseExitCode": 1,
-			"ParsedText": "LUNCH BOX SRL\t\r\nPUNCT LUCRU STR.AVRAM IANCU NR. 492\t\r\nLOC.FLORESTI JUDET CLUJ\t\r\nC.F. RO25641396\t\r\nOP. 99\t\r\nCARDURILE AROMATE LUNCHBOX\t\r\nTI ADUC NUNAT AVANTAJE\t\r\nCERE UN CARD LA CASA.\t\r\nDENUM IRE I PRET X CANTI TOTAL\t\r\nAMBALAJ-FEL DOI/CIORBA\t\r\n1 BUC\t1,00\t1,00C\t\r\nPUNGI LUNCHBOX\t\r\n1 BUCX\t0.50\t0.50C\t\r\nAMBALAJ-FEL DOI/CIORBA\t\r\n1 BUC X\t1.00\t1.00C\t\r\nCARTOFI NEMTESTI CU KAIZER SI CA\t\r\n2.42060 BUC X\t5.50\t13.31C\t\r\nLEGUME LA TIGAIE\t\r\n2.180OG BUC X\t4.70\t10.25C\t\r\nPIEPT DE PUI AROMAT LA GRATAR\t\r\n1,9200 BUC X\t7,00\t13,44C\t\r\nTOTAL\t39,30\t\r\nNUMERAR\t39 50\t\r\nTVA C\t5.00%\t1.88\t\r\nTOTAL TVA\t1,88\t\r\n13/11/2021 17:09\tNR.BF:0285 #01\t\r\n6000280849\t\r\nBON FISCAL\t\r\n",
+			"ParsedText": "LUNCH BOX SRL\t\r\nPUNCT LUCRU STR.AVRAM IANCU NR. 492\t\r\nLOC.FLORESTI JUDET CLUJ\t\r\nC.F. RO25641396\t\r\nOP. 99\t\r\nCARDURILE AROMATE LUNCHBOX\t\r\nIADUC NUMAT AVANTAJE\t\r\nCERE UN CARD LA CASA.\t\r\nDENUM IRE I PRET X CANTI TOTAL\t\r\nAMBALAJ-FEL DOI/CIORBA\t\r\n1 BUC\tX\t1,00\t1,00C\t\r\nPUNGI LUNCHBOX\t\r\n1 BUC X\t0.50\t0.50C\t\r\nAMBALAJ-FEL DOI/CIORBA\t\r\n1 BUC X\t1.00\t1.00C\t\r\nCARTOFI NEMTESTI CU KAIZER SI CA\t\r\n2.42060 BUC X\t5.50\t13.31C\t\r\nLEGUME LA TIGAIE\t\r\n2.180OG BUC X\t4.70\t10.25C\t\r\nPIEPT DE PUI AROMAT LA GRATAR\t\r\n1,9200 BUC X\t7,00\t13,44C\t\r\nTOTAL\t39,30\t\r\nNUMERAR\t39 50\t\r\nTVA C\t5.00%\t1.88\t\r\nTOTAL TVA\t1,88\t\r\n13/11/2021 17:09\tNR.BF:0285 #01\t\r\n6000280849\t\r\nBON FISCAL\t\r\n",
 			"ErrorMessage": "",
 			"ErrorDetails": ""
 		}
 	],
 	"OCRExitCode": 1,
 	"IsErroredOnProcessing": false,
-	"ProcessingTimeInMilliseconds": "3102"
+	"ProcessingTimeInMilliseconds": "3984",
+	"SearchablePDFURL": "https://api.ocr.space:443/SearchablePDF/d5e38271-4c40-4607-b23b-db3853fac8ac.pdf"
 }
 ';   
     }
 
 	public static function getDummyExpectation1()
-    {
-      return [
-
-      ];
-    }
+	{
+		return [
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => 'AMBALAJ-FEL DOI/CIORBA 1 BUC X 1,00 1,00C',
+				OcrSpaceCommon::ARTICLE_NAME => 'AMBALAJ-FEL DOI/CIORBA',
+				OcrSpaceCommon::QUANTITY_TEXT => '1 BUC X 1.00',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '1'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => 'PUNGI LUNCHBOX 1 BUC X 0.50 0.50C',
+				OcrSpaceCommon::ARTICLE_NAME => 'PUNGI LUNCHBOX',
+				OcrSpaceCommon::QUANTITY_TEXT => '1 BUC X 0.50',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '0.5'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => 'AMBALAJ-FEL DOI/CIORBA 1 BUC X 1.00 1.00C',
+				OcrSpaceCommon::ARTICLE_NAME => 'AMBALAJ-FEL DOI/CIORBA',
+				OcrSpaceCommon::QUANTITY_TEXT => '1 BUC X 1.00',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '1'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => 'CARTOFI NEMTESTI CU KAIZER SI CA 2.42060 BUC X 5.50 13.31C',
+				OcrSpaceCommon::ARTICLE_NAME => 'CARTOFI NEMTESTI CU KAIZER SI CA',
+				OcrSpaceCommon::QUANTITY_TEXT => '2.42060 BUC X 5.50',
+				OcrSpaceCommon::QUANTITY => '2.4206',
+				OcrSpaceCommon::TOTAL_COST => '13.31'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => 'PIEPT DE PUI AROMAT LA GRATAR 1,9200 BUC X 7,00 13,44C',
+				OcrSpaceCommon::ARTICLE_NAME => 'PIEPT DE PUI AROMAT LA GRATAR',
+				OcrSpaceCommon::QUANTITY_TEXT => '1.9200 BUC X 7.00',
+				OcrSpaceCommon::QUANTITY => '1.92',
+				OcrSpaceCommon::TOTAL_COST => '13.44'
+			]
+		];
+	}
 }

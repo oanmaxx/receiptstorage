@@ -59,8 +59,8 @@ function showExpectedAndActual($expected, $actual) {
         $expectedItem = $expected[$i] ?? null;
         $actualItem = $actual[$i] ?? null;
         echo "<tr>";
-        echo "<td style='background-color:lightgrey'>". $expectedItem[OcrSpaceCommon::LINE] ?? '' . "</td>";
-        echo "<td>".  $actualItem[OcrSpaceCommon::LINE] ?? '' . "</td>";
+        echo "<td style='background-color:lightgrey'>". $expectedItem[OcrSpaceCommon::ORIGINAL_LINE] ?? '' . "</td>";
+        echo "<td>".  $actualItem[OcrSpaceCommon::ORIGINAL_LINE] ?? '' . "</td>";
         echo "</tr>";
     }
     echo '</table>';

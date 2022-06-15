@@ -4,19 +4,21 @@ class CorrectionController
 {
     private $existingWordCorrections = [
         'BIC' => 'BUC',
+        'BUCX' => 'BUC X',
+        'BUCx' => 'BUC X',
         'BI' => 'BUC',
         '1.C00' => '1.000',
+        '1.U00' => '1.000',
+        '1.UU0' => '1.000',
+        'UUU' => '1.000',
         'C00' => '1.000',
         'SPRESSU' => 'ESPRESSO',
         'BuICX' => 'BUC X',
         '1.003.00' => '1.00 3.00',
         'AIYERICANO' => 'AMERICANO',
         'CPPUCCIND' => 'CAPPUCINO',
-    ];
-
-    private $existingLineCorrections = [
-        'C00 BUCx 21.99' => '1.000 BUC X 21.99',
-        'Bluza 100 Gri Dana' => 'Bluza 100 Gri Dama',
+        'b.99' => '6.99',
+        'BLICX' => 'PLIC X',
     ];
 
     public function addCorrectedWord($word, $correction)
@@ -30,14 +32,6 @@ class CorrectionController
     {
         if (isset($this->existingWordCorrections[$word])) {
             return $this->existingWordCorrections[$word];
-        }
-        return null;
-    }
-
-    public function getCorrectedLine($line)
-    {
-        if (isset($this->existingLineCorrections[$line])) {
-            return $this->existingLineCorrections[$line];
         }
         return null;
     }

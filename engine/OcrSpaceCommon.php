@@ -2,7 +2,7 @@
 
 class OcrSpaceCommon
 {
-    public const LINE = 'line';    
+    public const ORIGINAL_LINE = 'line';    
     public const ARTICLE_NAME = 'articleName';
     public const QUANTITY_TEXT = 'quantityText';
     public const QUANTITY = 'quantity';

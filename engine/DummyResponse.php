@@ -10,8 +10,8 @@ require_once __DIR__ . '/dummy_data/DummyCarrefour.php';
 
 class DummyResponse
 {
-    public function getDummyData($fileName)
-    {        
+    public static function getDummyData($fileName)
+    {
         if ($fileName === 'yummyyang_bon_1.png') {
             return DummyYummyYang::getDummyResponse1();
         } else if ($fileName ==='decathlon_bon_1.png') {
@@ -31,5 +31,7 @@ class DummyResponse
         } else if ($fileName === 'carrefour_bon_1.png') {
             return DummyCarrefour::getDummyResponse1();
         }
+
+		return null;
     }
 }

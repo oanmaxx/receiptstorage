@@ -9,9 +9,11 @@ require_once 'CorrectionController.php';
 class Engine
 {
     public static function uploadToApi($target_file)
-    {        
-        //$result = self::parseWithOCRSpace($target_file);
-        $result = self::parseWithDummy($target_file);
+    {
+		$result = self::parseWithDummy($target_file);
+		if ($result == null) {
+            $result = self::parseWithOCRSpace($target_file);
+		}
 
         return $result;
     }
@@ -65,7 +67,7 @@ class Engine
                     'file' => $fileData
                 ]
             );
-                
+
             $result = self::parseResponse($r->getBody());
 
         } catch(Exception $err) {            
@@ -79,8 +81,12 @@ class Engine
     {
         $target_file = strtolower($_FILES["attachment"]["name"]);
         $dummyData = DummyResponse::getDummyData($target_file);
+		
+		if ($dummyData != null) {
+			return self::parseResponse($dummyData);
+		}
 
-        return self::parseResponse($dummyData);
+        return null;
     }
 
     private static function parseResponse($jsonData)

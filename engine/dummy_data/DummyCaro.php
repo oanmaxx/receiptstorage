@@ -1172,9 +1172,43 @@ return
     }
 
 	public static function getDummyExpectation1()
-    {
-      return [
-
-      ];
-    }
+	{
+		return [
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => 'BUCOVINA PLATA 330ML 3 ST X 8,00 24,00 C',
+				OcrSpaceCommon::ARTICLE_NAME => 'BUCOVINA PLATA 330ML',
+				OcrSpaceCommon::QUANTITY_TEXT => '3 ST X 8.00',
+				OcrSpaceCommon::QUANTITY => '3',
+				OcrSpaceCommon::TOTAL_COST => '24'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => 'PRIGAT PIERSICI 250ML 1 ST X 10,00 10,00 C',
+				OcrSpaceCommon::ARTICLE_NAME => 'PRIGAT PIERSICI 250ML',
+				OcrSpaceCommon::QUANTITY_TEXT => '1 ST X 10.00',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '10'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => 'SHORT SPRESSU 1 PO X 8,00 8,00 C',
+				OcrSpaceCommon::ARTICLE_NAME => 'SHORT ESPRESSO',
+				OcrSpaceCommon::QUANTITY_TEXT => '1 PO X 8.00',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '8'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => 'LATTE MACHIATTO 2 PO X 10,00 20,00 C',
+				OcrSpaceCommon::ARTICLE_NAME => 'LATTE MACHIATTO',
+				OcrSpaceCommon::QUANTITY_TEXT => '2 PO X 10.00',
+				OcrSpaceCommon::QUANTITY => '2',
+				OcrSpaceCommon::TOTAL_COST => '20'
+			],
+			[
+				OcrSpaceCommon::ORIGINAL_LINE => 'CHOCOLATE COFFEE 1 PO X 12,00 12,00 C',
+				OcrSpaceCommon::ARTICLE_NAME => 'CHOCOLATE COFFEE',
+				OcrSpaceCommon::QUANTITY_TEXT => '1 PO X 12.00',
+				OcrSpaceCommon::QUANTITY => '1',
+				OcrSpaceCommon::TOTAL_COST => '12'
+			]
+		];
+	}
 }
