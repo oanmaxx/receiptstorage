@@ -52,15 +52,15 @@ function getDifferences($actual, $expected) {
 function showExpectedAndActual($expected, $actual) {
     $expectedCount = count($expected);
     $actualCount = count($actual);
-    $max = $expectedCount > $actualCount ? $expectedCount : $actualCount;
+    $max = max($expectedCount, $actualCount);
     echo '<table>';
     echo '<th>Expected Rows</th><th>Actual Rows</th>';  
     for ($i = 0; $i<$max; $i++){
         $expectedItem = $expected[$i] ?? null;
         $actualItem = $actual[$i] ?? null;
         echo "<tr>";
-        echo "<td style='background-color:lightgrey'>". $expectedItem[OcrSpaceCommon::ORIGINAL_LINE] ?? '' . "</td>";
-        echo "<td>".  $actualItem[OcrSpaceCommon::ORIGINAL_LINE] ?? '' . "</td>";
+        echo "<td style='background-color:lightgrey'>". ($expectedItem[OcrSpaceCommon::ORIGINAL_LINE] ?? '') . "</td>";
+        echo "<td>". ($actualItem[OcrSpaceCommon::ORIGINAL_LINE] ?? '') . "</td>";
         echo "</tr>";
     }
     echo '</table>';

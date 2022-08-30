@@ -2,6 +2,7 @@
 
 require_once 'pages/Home.php';
 require_once 'pages/Upload.php';
+require_once 'pages/ConversionPersist.php';
 
 class Application
 {
@@ -18,7 +19,10 @@ class Application
 
         if (isset($_POST['action']) && $_POST['action'] == 'uploadReceipt') {
             $pageContent .= Upload::getPage();
-        } else {
+        } else if (isset($_POST['action']) && $_POST['action'] == 'confirmConversion') {
+            $pageContent .= ConversionPersist::getPage();
+        }
+        else {
             $pageContent .= Home::getPage();
         }
 

@@ -9,6 +9,7 @@ class OcrSpaceFormatter
         $tableResponse = '<form action="index.php" method="POST">';  
         $tableResponse .= '<input type="hidden" name="action" value="confirmConversion" /> ';
         $tableResponse .= '<input type="hidden" name="engine" value="OcrSpace" /> ';
+        $tableResponse .= '<input class="storeInput" name="store" value="Nume magazin" />';
         $tableResponse .= '<table>';
         
         $i = 1;
@@ -45,7 +46,7 @@ class OcrSpaceFormatter
             $htmlResponse .= '<td>';
             $htmlResponse .= '<label for="' . $baseId . '">' . $this->getTranslation($key) . ':</label>';
             $htmlResponse .= '<br>';
-            $htmlResponse .= '<input class="detectionInput" type="text" id="' . $baseId . '" value="'. $field .'" readonly/>';
+            $htmlResponse .= "<input class='detectionInput' type='text' id='$baseId' name='$baseId' value='$field' readonly/>";
             $htmlResponse .= '</td>';
         }        
         $htmlResponse .= '</tr>';
