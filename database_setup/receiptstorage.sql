@@ -28,12 +28,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `products` (
-  `id_product` int(11) NOT NULL,
-  `id_receipt` int(11) NOT NULL,
-  `description` varchar(250) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `unit_price` float NOT NULL,
-  `total_price` float NOT NULL
+                            `id_product` int(11) NOT NULL,
+                            `id_receipt` int(11) NOT NULL,
+                            `description` varchar(250) NOT NULL,
+                            `quantity` int(11) NOT NULL,
+                            `unit_price` DECIMAL(9, 2) NOT NULL,
+                            `total_price` DECIMAL(9, 2) NOT NULL,
+                            `category` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -43,8 +44,9 @@ CREATE TABLE `products` (
 --
 
 CREATE TABLE `receipts` (
-  `id_receipt` int(11) NOT NULL,
-  `date` date DEFAULT NULL
+                            `id_receipt` int(11) NOT NULL,
+                            `id_store` int(11) NOT NULL,
+                            `date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -54,9 +56,8 @@ CREATE TABLE `receipts` (
 --
 
 CREATE TABLE `stores` (
-  `id_store` int(11) NOT NULL,
-  `id_receipt` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
+                          `id_store` int(11) NOT NULL,
+                          `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -67,21 +68,21 @@ CREATE TABLE `stores` (
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id_product`),
+    ADD PRIMARY KEY (`id_product`),
   ADD KEY `id_receipt` (`id_receipt`);
 
 --
 -- Indexes for table `receipts`
 --
 ALTER TABLE `receipts`
-  ADD PRIMARY KEY (`id_receipt`);
+    ADD PRIMARY KEY (`id_receipt`),
+  ADD KEY `id_receipt` (`id_store`);
 
 --
 -- Indexes for table `stores`
 --
 ALTER TABLE `stores`
-  ADD PRIMARY KEY (`id_store`),
-  ADD KEY `id_receipt` (`id_receipt`);
+    ADD PRIMARY KEY (`id_store`);
 
 --
 -- Constraints for dumped tables
@@ -91,13 +92,13 @@ ALTER TABLE `stores`
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_receipt`) REFERENCES `receipts` (`id_receipt`);
+    ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_receipt`) REFERENCES `receipts` (`id_receipt`);
 
 --
 -- Constraints for table `stores`
 --
-ALTER TABLE `stores`
-  ADD CONSTRAINT `stores_ibfk_1` FOREIGN KEY (`id_receipt`) REFERENCES `receipts` (`id_receipt`);
+ALTER TABLE `receipts`
+    ADD CONSTRAINT `receipts_ibfk_1` FOREIGN KEY (`id_store`) REFERENCES `stores` (`id_store`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

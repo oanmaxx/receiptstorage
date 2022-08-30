@@ -1,0 +1,57 @@
+<style>
+    .centered{
+        position: relative;
+        top: 50%;
+        left: 20%;
+        margin-top: 20px;
+        width: 60%;
+        min-height: 250px;
+    }
+
+    .centeredButton{
+        margin: 0;
+        color: rgb(0, 0, 0);
+        background: #16a085;
+        border: none;
+        width: 50%;
+        height: 35px;
+        margin-top: 20px;
+        margin-left: 25%;
+        border-radius: 4px;
+        border-bottom: 4px solid #117A60;
+        transition: all .2s ease;
+        outline: none;
+    }
+    .centeredButton:hover{
+        background: #149174;
+        color: #0C5645;
+    }
+
+    .centeredButton:active{
+        border:0;
+    }
+
+    .searchButton
+    {
+        border: gray;
+    }
+</style>
+
+<div class="centered">
+    <form class="headerForm" action="index.php" method="GET">
+        <table>
+            <tr>
+                <td>Cauta produs:</td>
+                <td><input type="text" name="search" placeholder="Produs ..." /></td>
+                <td><button class="searchButton" type="submit" class="centeredButton">Cauta</button></td>
+            </tr>
+        </table>
+    </form>
+
+    <div class='persist'>
+        STATISTICS_PLACEHOLDER
+    </div>
+    <form action="index.php" method="GET">
+        <button type="submit" class="centeredButton">Inapoi</button>
+    </form>
+</div>

@@ -7,6 +7,7 @@ class OcrSpaceCommon
     public const QUANTITY_TEXT = 'quantityText';
     public const QUANTITY = 'quantity';
     public const TOTAL_COST = 'totalCost';
+    public const CATEGORY = 'category';
 
     public static function sortWordsLeftToRight($lineA, $lineB) {
         return $lineA['MaxRight'] > $lineB['MaxRight'];

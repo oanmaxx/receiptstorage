@@ -3,6 +3,7 @@
 require_once 'pages/Home.php';
 require_once 'pages/Upload.php';
 require_once 'pages/ConversionPersist.php';
+require_once 'pages/Statistics.php';
 
 class Application
 {
@@ -21,6 +22,8 @@ class Application
             $pageContent .= Upload::getPage();
         } else if (isset($_POST['action']) && $_POST['action'] == 'confirmConversion') {
             $pageContent .= ConversionPersist::getPage();
+        } else if (isset($_GET['search']) || (isset($_GET['action']) && $_GET['action'] == 'productStatistics')) {
+            $pageContent .= Statistics::getPage();
         }
         else {
             $pageContent .= Home::getPage();

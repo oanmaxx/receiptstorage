@@ -5,13 +5,18 @@ require_once 'OcrSpaceCommon.php';
 class OcrSpaceFormatter
 {
     public function formatResultTable($storeName, $articles, $totalSum)
-    {    
+    {
+        $dateNow = date('Y-m-d H:i:s');
         $tableResponse = '<form action="index.php" method="POST">';  
         $tableResponse .= '<input type="hidden" name="action" value="confirmConversion" /> ';
         $tableResponse .= '<input type="hidden" name="engine" value="OcrSpace" /> ';
-        $tableResponse .= '<input class="storeInput" name="store" value="Nume magazin" />';
+
         $tableResponse .= '<table>';
-        
+        $tableResponse .= '<tr><td>Data bon: </td><td><input class="receiptDateInput" name="receiptDate" value="'. $dateNow .'" /></td></tr>';
+        $tableResponse .= '<tr><td style="vertical-align: top;">Magazin: </td><td><input class="storeInput" name="store" value="Nume magazin" /></td></tr>';
+        $tableResponse .= '</table>';
+
+        $tableResponse .= '<table>';
         $i = 1;
         foreach($articles as $article) {
             $tableResponse .= $this->formatDetectionForHtml($i, $article);
@@ -48,7 +53,8 @@ class OcrSpaceFormatter
             $htmlResponse .= '<br>';
             $htmlResponse .= "<input class='detectionInput' type='text' id='$baseId' name='$baseId' value='$field' readonly/>";
             $htmlResponse .= '</td>';
-        }        
+        }
+        $htmlResponse .= self::renderCategory($id, $article[OcrSpaceCommon::ARTICLE_NAME]);
         $htmlResponse .= '</tr>';
     
         return $htmlResponse;
@@ -76,5 +82,18 @@ class OcrSpaceFormatter
         }
 
         return $text;
+    }
+
+    private function renderCategory($id, $default)
+    {
+        $baseId = OcrSpaceCommon::CATEGORY . '_' . $id;
+
+        $htmlResponse = '<td>';
+        $htmlResponse .= '<label for="' . $baseId . '">Categorie:</label>';
+        $htmlResponse .= '<br>';
+        $htmlResponse .= "<input class='detectionInput' type='text' id='$baseId' name='$baseId' value='$default'/>";
+        $htmlResponse .= '</td>';
+
+        return $htmlResponse;
     }
 }

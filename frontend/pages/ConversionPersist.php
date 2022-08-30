@@ -3,7 +3,7 @@
 require_once 'Page.php';
 require_once 'Header.php';
 require_once 'Footer.php';
-require_once __DIR__ . '/../../engine/Engine.php';
+require_once __DIR__ . '/../../engine/OcrSpaceCommon.php';
 require_once __DIR__ . '/../../database_setup/DbConnection.php';
 
 class ConversionPersist
@@ -36,21 +36,29 @@ class ConversionPersist
         }
         $articles = [];
         foreach ($_POST as $key => $value) {
-            if (str_starts_with($key, 'articleName_')) {
+            if (str_starts_with($key, OcrSpaceCommon::ARTICLE_NAME)) {
                 $tokenSplit = explode('_', $key);
-                $index = $tokenSplit[1] ?? null;
-                if ($index) {
-                    $quantity = isset($_POST["quantity_$index"]) ? (float)($_POST["quantity_$index"]) : 0;
-                    $totalPrice = isset($_POST["totalCost_$index"]) ? (float)($_POST["totalCost_$index"]) : 0;
+                $rowId = $tokenSplit[1] ?? null;
+                if ($rowId) {
+                    $articleKeyRowId = OcrSpaceCommon::ARTICLE_NAME . '_' . $rowId;
+                    $quantityKeyRowId = OcrSpaceCommon::QUANTITY . '_' . $rowId;
+                    $totalCostKeyRowId = OcrSpaceCommon::TOTAL_COST . '_' . $rowId;
+                    $categoryKey = OcrSpaceCommon::CATEGORY . '_' . $rowId;
+
+                    $quantity = isset($_POST[$quantityKeyRowId]) ? (float)($_POST[$quantityKeyRowId]) : 0;
+                    $totalPrice = isset($_POST[$totalCostKeyRowId]) ? (float)($_POST[$totalCostKeyRowId]) : 0;
                     if ($quantity <= 0) {
                         $quantity = 1;
                     }
                     $unitPrice = $totalPrice / $quantity;
+                    $description = $_POST[$articleKeyRowId] ?? '';
+                    $category = $_POST[$categoryKey] ?? $description;
                     $articles[] = [
-                        'description' => $_POST["articleName_$index"] ?? '',
+                        'description' => $description,
                         'quantity' => $quantity,
                         'unit_price' => $unitPrice,
                         'total_price' => $totalPrice,
+                        'category' => $category
                     ];
                 }
             }
@@ -63,10 +71,11 @@ class ConversionPersist
 
             try {
                 $now = date('Y-m-d H:i:s');
+                $receiptDate = $_POST['receiptDate'] ?? $now;
                 $connection->insertPrepared(
                     'receipts',
                     ['id_receipt', 'id_store', 'date'],
-                    [$idReceipt, $idStore, $now],
+                    [$idReceipt, $idStore, $receiptDate],
                     ['i', 'i', 's']
                 );
 
@@ -77,7 +86,7 @@ class ConversionPersist
                     }
                     $connection->insertPrepared(
                         'products',
-                        ['description', 'id_product', 'id_receipt', 'quantity', 'total_price', 'unit_price'],
+                        ['description', 'id_product', 'id_receipt', 'quantity', 'total_price', 'unit_price', 'category'],
                         [
                             $article['description'],
                             $productId,
@@ -85,8 +94,9 @@ class ConversionPersist
                             $article['quantity'],
                             $article['total_price'],
                             $article['unit_price'],
+                            $article['category']
                         ],
-                        ['s', 'i', 'i', 'i', 'i', 'i']
+                        ['s', 'i', 'i', 'd', 'd', 'd', 's']
                     );
                     if ($connection->lastError()) {
                         throw new Exception($connection->lastError());

@@ -72,4 +72,12 @@ class DbConnection
         $stmt->execute();
         $stmt->close();
     }
+
+    public function executePrepared($sql, $values, $typeList)
+    {
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bind_param($typeList, ...$values);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
 }
