@@ -26,7 +26,7 @@ class OcrSpaceFormatter
         }
 
         $tableResponse .= '</table>';
-        $tableResponse .= '<button type="submit">Confirma</button>';        
+        $tableResponse .= '<button class="confirmButton" type="submit">Confirma</button>';
         $tableResponse .= '</form>';
 
         return $tableResponse;
@@ -48,10 +48,12 @@ class OcrSpaceFormatter
                 continue;
             }
 
+            $isNumber = $key === OcrSpaceCommon::QUANTITY || $key === OcrSpaceCommon::TOTAL_COST;
+            $class = $isNumber  ? 'numberInput' : 'detectionInput';
             $htmlResponse .= '<td>';
             $htmlResponse .= '<label for="' . $baseId . '">' . $this->getTranslation($key) . ':</label>';
             $htmlResponse .= '<br>';
-            $htmlResponse .= "<input class='detectionInput' type='text' id='$baseId' name='$baseId' value='$field' readonly/>";
+            $htmlResponse .= "<input class='". $class ."' type='text' id='$baseId' name='$baseId' value='$field' readonly/>";
             $htmlResponse .= '</td>';
         }
         $htmlResponse .= self::renderCategory($id, $article[OcrSpaceCommon::ARTICLE_NAME]);

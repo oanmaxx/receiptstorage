@@ -27,7 +27,7 @@ class Statistics
             $regexSearch = $search === '*' ? '%' : "%$search%";
             $distinctPrices = self::pretDistinctLunarProdusPerMagazin($regexSearch);
             $html .= '<table>';
-            $html .= '<thead><tr><th>An</th><th>Luna</th><th>Produs</th><th>Pret</th><th>Magazin</th></tr></thead>';
+            $html .= '<thead style="text-align: left"><tr><th class="numberHeader">An</th><th class="numberHeader">Luna</th><th class="storeHeader">Magazin</th><th class="productHeader">Produs</th><th class="numberHeader">Pret</th></tr></thead>';
             $html .= '<tbody>';
             foreach ($distinctPrices as $price) {
                 $an = $price['AN'];
@@ -36,7 +36,7 @@ class Statistics
                 $pret = $price['Pret_Unitar'];
                 $magazin = $price['Magazin'];
                 $html .= '<tr>';
-                $html .= "<td>$an</td><td>$luna</td><td>$prod</td><td>$pret</td><td>$magazin</td>";
+                $html .= "<td>$an</td><td>$luna</td><td>$magazin</td><td>$prod</td><td>$pret</td>";
                 $html .= '</tr>';
             }
             $html .= '</tbody></table>';
